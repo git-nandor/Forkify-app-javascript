@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements, getBackgroundColor } from './base';
 import { Fraction } from 'fractional';
 
 export const clearRecipe = () => {
@@ -38,8 +38,9 @@ const createIngredient = ingredient => `
     </li>       
 `;
 
-export const renderRecipe = recipe => {
-
+export const renderRecipe = (recipe, like) => {
+    const iconString = like ? 'icon-heart' : 'icon-heart-outlined';
+    
     const markup = `
         <figure class="recipe__fig">
             <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img">
@@ -64,12 +65,12 @@ export const renderRecipe = recipe => {
                 <span class="recipe__info-text"> servings</span>
 
                 <div class="recipe__info-buttons">
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-decrease">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-minus"></use>
                         </svg>
                     </button>
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-increase">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-plus"></use>
                         </svg>
@@ -79,7 +80,7 @@ export const renderRecipe = recipe => {
             </div>
             <button class="recipe__love">
                 <svg class="header__likes">
-                    <use href="img/icons.svg#icon-heart-outlined"></use>
+                    <use href="img/icons.svg#${iconString}"></use>
                 </svg>
             </button>
         </div>
@@ -92,7 +93,7 @@ export const renderRecipe = recipe => {
                 }
             </ul>
 
-            <button class="btn-small recipe__btn">
+            <button class="btn-small recipe__btn recipe__btn--add">
                 <svg class="search__icon">
                     <use href="img/icons.svg#icon-shopping-cart"></use>
                 </svg>
@@ -116,4 +117,39 @@ export const renderRecipe = recipe => {
         </div>
     `;
     elements.recipe.insertAdjacentHTML('afterbegin', markup);
+    elements.recipe.style.backgroundColor = getBackgroundColor('recipe');
 };
+
+export const renderRecipeError = error => {
+    const markup = `
+        <figure class="recipe__fig">
+            <img src="img/error_img.jpeg" alt="ERROR" class="recipe__img">
+            <h1 class="recipe__title error_title">
+                <span>SOMETHING WENT WRONG</span>
+            </h1>
+        </figure>
+
+        <div class="recipe__details">
+            <div class="recipe__info"> 
+                <span class="recipe__info-error">
+                    <p>${error}</p>
+                </span>
+            </div>
+        </div>
+    `;
+    elements.recipe.insertAdjacentHTML('afterbegin', markup);
+}
+
+export const updateServingsIngredients = recipe => {
+    // Update servings
+    document.querySelector('.recipe__info-data--people').textContent = recipe.servings;
+
+    // Update Ingredients
+    const countElements = Array.from(document.querySelectorAll('.recipe__count'));
+
+    countElements.forEach((element, index) => {
+        // countElements are the DOM ingredients array same as recipe.ingredient array
+        // Loop through the DOM elements and update based on the recipe.ingredient array  
+        element.textContent = formatCount(recipe.ingredients[index].count);
+    });
+}

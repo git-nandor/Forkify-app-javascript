@@ -342,8 +342,12 @@
 
 
         <div class="shopping">
-            <h2 class="heading-2">My Shopping List</h2>
-
+            <h2 class="heading-3">My Shopping List</h2>
+            <div class="shopping-list-clear-container">
+                <button id="shopping-list-clear">Clear list</button>
+            </div>
+            
+            
             <ul class="shopping__list">
 
                 <!--
@@ -426,10 +430,19 @@
                     </button>
                 </li>
                 -->
+                
             </ul>
+            <div id="go-to-checklist">
+                <button class="btn-small list__btn ">
+                    <svg class="search__icon">
+                        <use href="img/icons.svg#icon-shopping-cart"></use>
+                    </svg>
+                    <span>Go shopping</span>
+                </button>
+            </div>
 
             <div class="copyright">
-                &copy; by Jonas Schmedtmann. Powered by
+                &copy; by Nandor Czegledi. Powered by
                 <a href="http://food2fork.com" target="_blank" class="link">Food2Fork.com</a>.
             </div>
 

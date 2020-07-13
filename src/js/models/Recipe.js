@@ -10,14 +10,12 @@ export default class Recipe {
             const result = await axios(`https://forkify-api.herokuapp.com/api/get?&rId=${this.id}`);
             this.img = result.data.recipe.image_url;
             this.ingredients = result.data.recipe.ingredients;
-            console.log(`Raw ingredients: \n ${this.ingredients}`);
             this.author = result.data.recipe.publisher_url;
-            //this.socialRank = result.data.recipe.social_rank;
             this.sourceUrl = result.data.recipe.source_url;
             this.title = result.data.recipe.title; 
 
         } catch (error) {
-            alert(`Error can't get recipe! ${error}`);
+            console.log('Something went wrong with recipe response/result');
         }
     }
 
@@ -49,11 +47,8 @@ export default class Recipe {
             unifiedIngredient = unifiedIngredient.replace(/ *\([^)]*\) */g, ' ');
 
             // 3. Parse ingredients into count, unit ,ingredient
-            console.log('RAW:');
-            console.log(unifiedIngredient);
             const arrIngredients = unifiedIngredient.split(' ');
-            console.log('SPLIT:');
-            console.log(arrIngredients);
+
             // ! FindIndex loop through arrIngredients and check if actual arrIngredientsElement is in arrUnitsShort.
             // ! If the includes return true than findIndex return the actual arrIngredientsElement index.
             const unitIndex = arrIngredients.findIndex(arrIngredientsElement => arrUnits.includes(arrIngredientsElement));
@@ -105,8 +100,17 @@ export default class Recipe {
           
             return objIngredient;
         });
-        console.log(`Unified ingredients: `);
-        console.log(newIngredients);
         this.ingredients = newIngredients;
+    }
+
+    updateServings (type) {
+        // Servings
+        const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+        // Ingredients
+        this.ingredients.forEach( ing => {
+            ing.count *= (newServings / this.servings);
+        });
+        this.servings = newServings;
     }
 }

@@ -130,6 +130,15 @@ body {
   text-align: center;
   transform: skewY(-3deg); }
 
+.heading-3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #F59A83;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  text-align: center;
+  transform: skewY(-3deg); }
+
 .copyright {
   color: #968B87;
   font-size: 1.2rem;
@@ -336,6 +345,9 @@ body {
     width: 70%;
     line-height: 1.95;
     text-align: center; }
+  .error_title {
+    bottom: -10px;
+    font-size: 2.2rem; }
     .recipe__title span {
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
@@ -435,21 +447,95 @@ body {
     color: #968B87; }
   .recipe__by {
     font-weight: 700; }
-
+    
 .shopping {
   padding: 3rem 4rem;
   display: flex;
   flex-direction: column; }
+  .shopping-list-clear-container {
+    display: flex;
+    flex-flow: row-reverse;
+    position: relative; }
+    #shopping-list-clear {
+      visibility: hidden;
+      margin-right: 5px;
+      background-color: white;
+      border: none;
+      position: absolute;
+      top: -20px;
+      right: 5px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #f38d6c;  }
+      #shopping-list-clear:focus {  
+        outline: none; }
   .shopping__list {
     list-style: none;
-    max-height: 77rem;
-    overflow: scroll; }
+    max-height: 100rem;
+    overflow: auto; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
   .shopping__item {
     display: flex;
     align-items: flex-start;
-    padding: 1.3rem 0;
-    border-bottom: 1px solid #F2EFEE;
+    padding: 1.3rem 0.6rem 1.3rem 0.6rem;
+    border-bottom: 1px solid #e6e6e6;
+    background-color: white;
     position: relative; }
+  .extra_item {
+    flex-wrap: wrap;  }    
+  .shopping__titled_section {
+    background-color: #f7f7f7;
+    margin-bottom: 10px; } 
+    .shopping-list-title-container {
+      border-bottom: 1px solid #f38d6c;
+      background-color: #F9F5F3; }
+      .shopping-list-title-link{
+        text-decoration: none;      }
+      .shopping-list-title {
+        font-weight: bold;
+        color: #f38d6c; }
+      .shopping-list-title-servings {
+        margin: 0;
+        margin-top: .3rem;
+        margin-right: .4rem;
+        padding: 0;
+        color: #f28d82;
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+      .list-title-icon {
+        margin-top: .5rem;
+        margin-right: .4rem;
+        height: 1.5rem;
+        width: 1.5rem;
+        font-size: 1.4rem;
+      }
+      .shopping-list-title-container .shopping__delete {
+        top: .2rem;
+      }
+  .extra_item input {
+    border: 1px solid #dcdcdc;
+    margin-left: .5rem;
+    margin-bottom: .5rem;
+    padding-left: .5rem;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1.2rem;  } 
+    .extra_item input:focus {
+      outline: none;
+      background-color: #F2EFEE;  }
+  .extra_item .extra_title {
+    padding-left: .5rem;
+    flex-basis: 100%;  }   
+  .extra_item .extra_count {
+    width: 4.6rem;  }
+  .extra_item .extra_ingredient {
+    width: 12rem;  }
+  .extra_item .shopping__add_extra_btn {
+    margin-left: .5rem;  }  
   .shopping__count {
     flex: 0 0 7.5rem;
     padding: .4rem .5rem;
@@ -459,29 +545,55 @@ body {
     cursor: pointer;
     display: flex;
     justify-content: space-between; }
+  .checklist_titled_section {
+    font-size: 1.3rem;
+    padding-top: 4rem;
+    background-color: #ffffff;}  
+  .checklist_titled_section:first-of-type {
+    padding-top: 8rem;}  
+  .checklist_titled_section .shopping__checklist {
+    min-width: 10rem;
+    margin-right: 2rem;
+    display: flex;
+    flex: 0 0 7.5rem;
+    padding: .4rem .5rem;
+    justify-content: space-between; }
+  .checklist_titled_section .shopping__checklist input[type="checkbox" i] {
+    display: flex;
+    align-self: center; }  
+  .shopping__checklist p:first-of-type {
+    margin-left: 2rem;
+    padding-right: 1rem;  }
     .shopping__count input {
       color: inherit;
       font-family: inherit;
       font-size: 1.2rem;
       text-align: center;
       border: none;
-      width: 3.7rem;
+      width: 4rem;
       border-radius: 3px; }
       .shopping__count input:focus {
         outline: none;
         background-color: #F2EFEE; }
     .shopping__count p {
       font-size: 1.2rem; }
+  .checklist-end {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #F9F5F3;
+    display: flex;
+    justify-content: center;  }    
   .shopping__description {
     flex: 1;
     font-size: 1.3rem;
     margin-top: .4rem;
     margin-right: 1.5rem; }
   .shopping__delete {
-    margin-top: .5rem;
+    margin-right: .5rem;
     position: absolute;
     right: 0;
-    background-image: linear-gradient(to right, transparent 0%, #fff 40%, #fff 100%);
+    top: .8rem;
     width: 3.75rem;
     padding-left: 2rem;
     visibility: hidden;
@@ -490,3 +602,8 @@ body {
   .shopping__item:hover .shopping__delete {
     opacity: 1;
     visibility: visible; }
+#go-to-checklist {
+    visibility: hidden;
+    display: flex;
+    margin-bottom: 5rem;
+    justify-content: center; }
