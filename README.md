@@ -1,14 +1,8 @@
 # Forkify-app-javascript
-Practice api calls, mvc modules, dom manipulation. 
+Practice API calls, MVC modules, DOM manipulation. 
 
 Author: Czegledi Nandor
 License: ISC
 
-
-Install:
-
-git init
-git remote add origin https://github.com/git-nandor/Forkify-app-javascript.git
-git pull origin master
-npm install
+Start:
 npm run start
